@@ -1,7 +1,11 @@
 <%= form_for @user do |f| %>
   <div>
-    <%= f.label :username %>
-    <%= f.text_field :username, autofocus: true %>
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname %>
   </div>
   <div>
     <%= f.label :email %>
