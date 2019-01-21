@@ -15,7 +15,8 @@ RSpec.describe "User authentication" do
   describe "Sign up" do
    it "allows a user to sign up" do
      visit 'users/new'
-     fill_in 'Username', with: 'dave'
+     fill_in 'Firstname', with: 'dave'
+     fill_in 'Lastname', with: 'davidson'
      fill_in 'Email', with: 'dave@test.com'
      fill_in 'Password', with: 'password'
      fill_in 'Password confirmation', with: 'password'
@@ -25,7 +26,8 @@ RSpec.describe "User authentication" do
 
    it "shows an error if the email is already taken" do
      visit 'users/new'
-     fill_in 'Username', with: 'testuser7'
+     fill_in 'Firstname', with: 'dave'
+     fill_in 'Lastname', with: 'davidson'
      fill_in 'Email', with: 'testuser@test.com'
      fill_in 'Password', with: 'password'
      fill_in 'Password confirmation', with: 'password'
@@ -35,20 +37,11 @@ RSpec.describe "User authentication" do
 
    it "shows an error if the password and password confirmation do not match" do
      visit 'users/new'
-     fill_in 'Username', with: 'testuser4'
+     fill_in 'Firstname', with: 'dave'
+     fill_in 'Lastname', with: 'davidson'
      fill_in 'Email', with: 'testuser4@test.com'
      fill_in 'Password', with: 'password'
      fill_in 'Password confirmation', with: 'password2'
-     click_button 'Sign up'
-     expect(page).to have_content sign_up_error_message
-   end
-
-   it "shows an error if the username is already taken" do
-     visit 'users/new'
-     fill_in 'Username', with: 'testuser'
-     fill_in 'Email', with: 'testuser9@test.com'
-     fill_in 'Password', with: 'password'
-     fill_in 'Password confirmation', with: 'password'
      click_button 'Sign up'
      expect(page).to have_content sign_up_error_message
    end
@@ -63,7 +56,7 @@ RSpec.describe "User authentication" do
       expect(page).to have_content(login_success_message)
     end
 
-    it "stops a user signing in if there username is not registered" do
+    it "stops a user signing in if they're not registered" do
       visit 'login'
       fill_in 'Email', with: 'notregistered@nothing.com'
       fill_in 'Password', with: 'password'
@@ -71,7 +64,7 @@ RSpec.describe "User authentication" do
       expect(page).to have_content(login_error_message)
     end
 
-    it "stops a user signing in if there password is incorrect" do
+    it "stops a user signing in if their password is incorrect" do
       visit 'login'
       fill_in 'Email', with: @test_user.email
       fill_in 'Password', with: 'incorrect_password'
@@ -79,7 +72,7 @@ RSpec.describe "User authentication" do
       expect(page).to have_content(login_error_message)
     end
 
-    it "stops a user from signing in unless they enter a username and password" do
+    it "stops a user from signing in unless they enter an email" do
       visit 'login'
       fill_in 'Email', with: ''
       fill_in 'Password', with: ''
