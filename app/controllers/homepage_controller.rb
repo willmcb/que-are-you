@@ -2,13 +2,17 @@ require 'rqrcode'
 
 class HomepageController < ApplicationController
 
-	def encode
-		@qr = RQRCode::QRCode.new(session[:user_id].to_s)
-		if session[:user_id] == 'undefined'
+	def index
+		if session[:user_id] == nil
 			redirect_to new_user_path
 		else
-		render :index
+			@qr = encode
+			render :index
 		end
-  end
+	end
+	
+	def encode
+		RQRCode::QRCode.new(session[:user_id].to_s)
+	end
 
 end
