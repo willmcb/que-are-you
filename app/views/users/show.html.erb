@@ -1,0 +1,18 @@
+<h2><%= @user.firstname %> <%= @user.lastname %></h2>
+<div>
+  <ul>
+    <li><%= @user.email %></li>
+
+    <% if @user.job_title %>
+      <li><%= @user.job_title %></li>
+    <% end %>
+
+    <% if @user.company_name %>
+      <li><%= @user.company_name %></li>
+    <% end %>
+
+    <% if @user.biography %>
+      <li><%= @user.biography %></li>
+    <% end %>
+  </ul>
+</div>
