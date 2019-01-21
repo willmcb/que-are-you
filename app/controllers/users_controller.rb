@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
       render :new
     end
+
   end
 
   private

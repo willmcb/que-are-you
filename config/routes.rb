@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'homepage#encode'
+  root :to => 'homepage#index'
 
   # sign up
   get 'users/new' => 'users#new', as: :new_user
