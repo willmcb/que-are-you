@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_01_22_100520) do
+=======
+ActiveRecord::Schema.define(version: 2019_01_21_161814) do
+>>>>>>> 50d05896813470e800c4016e8778818d82d6aeed
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +35,9 @@ ActiveRecord::Schema.define(version: 2019_01_22_100520) do
     t.string "password_digest"
     t.string "firstname"
     t.string "lastname"
+    t.string "job_title"
+    t.string "company_name"
+    t.string "biography"
   end
 
 end
