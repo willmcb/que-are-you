@@ -3,16 +3,15 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show
-    @user = User.find(params['id'])
-  end
-
   def create
     @user = User.new(user_params)
 
     @user.email.downcase!
 
     if @user.save
+      user_id = User.find_by(email: @user.email.downcase).id
+      session[:user_id] = user_id.to_s
+      
       flash[:notice] = "Account created successfully!"
       redirect_to root_path
     else
