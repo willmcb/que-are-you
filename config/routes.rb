@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root :to => 'users#new'
 
   # sign up
-  get 'users/new' => 'users#new', as: :new_user
+  get 'users/new' => 'users#new', as: 'new_user'
 	post 'users' => 'users#create'
 
   # log in:
@@ -16,5 +16,8 @@ Rails.application.routes.draw do
 
   # user profile page show
   get 'users/:id' => 'users#show'
+
+  # users edit profile page
+  get 'users/:id/edit' => 'users#edit', as: 'edit_profile'
 
 end
