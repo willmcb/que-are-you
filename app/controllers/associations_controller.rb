@@ -24,8 +24,8 @@ class AssociationsController < ApplicationController
   # POST /associations
   # POST /associations.json
   def create
-    @association = Association.new(association_params)
-
+    @association = current_user.associations.build(associate_id: params['associate_id'])
+    @opp_association = opposite_association(params['associate_id'], current_user.id)
     respond_to do |format|
       if @association.save
         format.html { redirect_to @association, notice: 'Association was successfully created.' }
@@ -48,13 +48,8 @@ class AssociationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_association
-      @association = Association.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def association_params
-      params.require(:association).permit(:user_id, :associate_id)
-    end
+  def opposite_friendship(associate_id, current_user_id)
+    User.find(associate_id).associations.build(associate_id: current_user_id)
+  end
 end
