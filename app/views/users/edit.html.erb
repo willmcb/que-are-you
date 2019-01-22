@@ -1,0 +1,30 @@
+<%= form_with url: update_profile_path do |f| %>
+  <div>
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname, autofocus: true, value: @user.firstname %>
+  </div>
+  <div>
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname, value: @user.lastname %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email, value: @user.email %>
+  </div>
+  <div>
+    <%= f.label :job_title %>
+    <%= f.text_field :job_title, value: @user.job_title %>
+  </div>
+  <div>
+    <%= f.label :company_name %>
+    <%= f.text_field :company_name, value: @user.company_name %>
+  </div>
+  <div>
+    <%= f.label :biography %>
+    <%= f.text_field :biography, value: @user.biography %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

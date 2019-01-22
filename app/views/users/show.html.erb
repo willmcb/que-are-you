@@ -15,4 +15,5 @@
       <li><%= @user.biography %></li>
     <% end %>
   </ul>
+  <%= link_to "Edit", edit_profile_path(id: @user.id) %>
 </div>
