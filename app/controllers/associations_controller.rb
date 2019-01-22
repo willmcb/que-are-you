@@ -40,25 +40,11 @@ class AssociationsController < ApplicationController
   # PATCH/PUT /associations/1
   # PATCH/PUT /associations/1.json
   def update
-    respond_to do |format|
-      if @association.update(association_params)
-        format.html { redirect_to @association, notice: 'Association was successfully updated.' }
-        format.json { render :show, status: :ok, location: @association }
-      else
-        format.html { render :edit }
-        format.json { render json: @association.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /associations/1
   # DELETE /associations/1.json
   def destroy
-    @association.destroy
-    respond_to do |format|
-      format.html { redirect_to associations_url, notice: 'Association was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -69,6 +55,6 @@ class AssociationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def association_params
-      params.require(:association).permit(:user_id, :user_id)
+      params.require(:association).permit(:user_id, :associate_id)
     end
 end
