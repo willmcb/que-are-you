@@ -24,8 +24,8 @@ class AssociationsController < ApplicationController
   # POST /associations
   # POST /associations.json
   def create
-    @association = current_user.associations.build(associate_id: params['associate_id'])
-    @opp_association = opposite_association(params['associate_id'], current_user.id)
+    p @association = current_user.associations.build(associate_id: params['association[associate_id]'])
+    p @opp_association = opposite_association(params['associate_id'], current_user.id)
     respond_to do |format|
       if @association.save
         format.html { redirect_to @association, notice: 'Association was successfully created.' }
@@ -49,7 +49,7 @@ class AssociationsController < ApplicationController
 
   private
 
-  def opposite_friendship(associate_id, current_user_id)
+  def opposite_association(associate_id, current_user_id)
     User.find(associate_id).associations.build(associate_id: current_user_id)
   end
 end
