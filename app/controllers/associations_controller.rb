@@ -1,10 +1,9 @@
 class AssociationsController < ApplicationController
-  before_action :set_association, only: [:show, :edit, :update, :destroy]
 
   # GET /associations
   # GET /associations.json
   def index
-    @associations = Association.all
+    @associations = Association.where(user_id: current_user.id)
   end
 
   # GET /associations/1
@@ -28,7 +27,7 @@ class AssociationsController < ApplicationController
     p @opp_association = opposite_association(params['association']['associate_id'], current_user.id)
     respond_to do |format|
       if @association.save && @opp_association.save
-        format.html { redirect_to @association, notice: 'Association was successfully created.' }
+        format.html { redirect_to associations_path, notice: 'Association was successfully created.' }
         format.json { render :show, status: :created, location: @association }
       else
         format.html { render :new }
@@ -45,6 +44,15 @@ class AssociationsController < ApplicationController
   # DELETE /associations/1
   # DELETE /associations/1.json
   def destroy
+    @association = current_user.associations.find_by(
+      associate_id: params['associate_id']
+    )
+    @opp_association = User.find(
+      params['associate_id']
+    ).associations.find_by(associate_id: current_user.id)
+    @association.destroy
+    @opp_association.destroy
+    redirect_to associations_path
   end
 
   private

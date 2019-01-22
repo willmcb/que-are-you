@@ -18,7 +18,7 @@
         <td><%= association.associate_id %></td>
         <td><%= link_to 'Show', association %></td>
         <td><%= link_to 'Edit', edit_association_path(association) %></td>
-        <td><%= link_to 'Destroy', association, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', association_path(association.associate_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
