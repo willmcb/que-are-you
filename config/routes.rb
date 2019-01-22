@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root :to => 'homepage#index'
+  get '/scanner' => 'homepage#scanner'
 
   # sign up
   get 'users/new' => 'users#new', as: :new_user

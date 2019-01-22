@@ -10,9 +10,14 @@ class HomepageController < ApplicationController
 			render :index
 		end
 	end
-	
+
+private
+
 	def encode
 		RQRCode::QRCode.new(session[:user_id].to_s)
 	end
 
+	def scanner
+		render :scanner
+	end
 end
