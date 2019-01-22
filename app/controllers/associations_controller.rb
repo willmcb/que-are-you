@@ -23,8 +23,8 @@ class AssociationsController < ApplicationController
   # POST /associations
   # POST /associations.json
   def create
-    p @association = current_user.associations.build(associate_id: params['association']['associate_id'])
-    p @opp_association = opposite_association(params['association']['associate_id'], current_user.id)
+    @association = current_user.associations.build(associate_id: params['association']['associate_id'])
+    @opp_association = opposite_association(params['association']['associate_id'], current_user.id)
     respond_to do |format|
       if @association.save && @opp_association.save
         format.html { redirect_to associations_path, notice: 'Association was successfully created.' }
