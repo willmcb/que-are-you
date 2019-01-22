@@ -15,9 +15,10 @@ Rails.application.routes.draw do
 	delete '/logout' => 'sessions#destroy'
 
   # user profile page show
-  get 'users/:id' => 'users#show'
+  get 'users/:id' => 'users#show', as: 'user_profile'
 
   # users edit profile page
   get 'users/:id/edit' => 'users#edit', as: 'edit_profile'
+  post 'users/:id/update' => 'users#update', as: 'update_profile'
 
 end
