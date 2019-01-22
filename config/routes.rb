@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :associations
   root :to => 'users#new'
 
   # sign up
