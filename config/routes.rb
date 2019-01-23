@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :associations
-  root :to => 'users#new'
+  root :to => 'users#index'
 
   # sign up
   get 'users/new' => 'users#new', as: 'new_user'
