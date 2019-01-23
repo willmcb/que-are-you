@@ -20,8 +20,9 @@ class UsersController < ApplicationController
     @user.email.downcase!
 
     if @user.save
-      flash[:notice] = "Account created successfully!"
       redirect_to root_path
+      session[:user_id] = @user.id.to_s
+      flash[:notice] = "Account created successfully!"
     else
       flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
       render :new
@@ -50,6 +51,6 @@ class UsersController < ApplicationController
 
   def encode
     RQRCode::QRCode.new(session[:user_id].to_s)
-  end 
+  end
 
 end

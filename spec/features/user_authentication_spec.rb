@@ -14,7 +14,8 @@ RSpec.describe "User authentication" do
 
   describe "Sign up" do
    it "allows a user to sign up" do
-     visit 'users/new'
+     visit '/'
+     click_link 'Create account'
      fill_in 'Firstname', with: 'dave'
      fill_in 'Lastname', with: 'davidson'
      fill_in 'Email', with: 'dave@test.com'
