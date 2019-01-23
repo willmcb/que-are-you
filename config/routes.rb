@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 	post 'users' => 'users#create'
 
   # log in:
-	get '/login' => 'sessions#new'
+	get '/login' => 'sessions#new', as: 'login_path'
 
 	# create (post) action for when log in form is submitted:
 	post '/login' => 'sessions#create'

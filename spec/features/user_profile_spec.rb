@@ -19,9 +19,9 @@ RSpec.describe "Profile page" do
   end
 
   def login
-     visit '/login'
-     fill_in 'Email', with: 'dave@test.com'
-     fill_in 'Password', with: 'password'
-     click_button 'Log in'
+    visit '/login'
+    fill_in 'Email', with: @test_user.email
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
   end
 end
