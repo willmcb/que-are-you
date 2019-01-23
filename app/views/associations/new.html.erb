@@ -1,11 +1,5 @@
-<%= form_for @association do |f| %>
-  <div>
-    <%= "Your user id is #{current_user.id}" %>
-  </div>
-  <div>
-    <%= f.label :associate_id %>
-    <%= f.text_field :associate_id, autofocus: true %>
-  <div>
-    <%= f.submit "Associate!" %>
-  </div>
-<% end %>
+<canvas id="canvas" hidden></canvas>
+
+<script>
+  qrscanner();
+</script>
