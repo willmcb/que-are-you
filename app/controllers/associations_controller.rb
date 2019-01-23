@@ -1,5 +1,9 @@
 class AssociationsController < ApplicationController
 
+  def index
+    @associations = Association.where(user_id: current_user.id)
+  end
+
   def new
     @association = Association.new
   end
