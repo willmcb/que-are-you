@@ -29,5 +29,7 @@ module Que_are_you
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.assets.paths << Rails.root.join('jsqr')
   end
 end

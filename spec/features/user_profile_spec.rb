@@ -17,11 +17,4 @@ RSpec.describe "Profile page" do
      expect(page).to have_content @test_user.biography
    end
   end
-
-  def login
-    visit '/login'
-    fill_in 'Email', with: @test_user.email
-    fill_in 'Password', with: 'password'
-    click_button 'Log in'
-  end
 end

@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :authorize, only: [:show, :edit, :update]
+  before_action :authorize, only: [:index, :show, :edit, :update]
 
   def new
     @user = User.new
+  end
+
+  def index
+     @qr = encode
   end
 
   def show
@@ -43,4 +47,9 @@ class UsersController < ApplicationController
   def update_user_params
     params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography)
   end
+
+  def encode
+    RQRCode::QRCode.new(session[:user_id].to_s)
+  end 
+
 end

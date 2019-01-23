@@ -1,5 +1,27 @@
 {
   "name": "que_are_you",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jsqr": "^1.1.1",
+    "rb": "^0.2.2"
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willmcb/que-are-you.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willmcb/que-are-you/issues"
+  },
+  "homepage": "https://github.com/willmcb/que-are-you#readme"
 }
