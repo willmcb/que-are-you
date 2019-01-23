@@ -1,26 +1,28 @@
-<%= form_for @user do |f| %>
-  <div>
-    <%= f.label :firstname %>
-    <%= f.text_field :firstname, autofocus: true %>
-  </div>
-  <div>
-    <%= f.label :lastname %>
-    <%= f.text_field :lastname %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
 
-  <div>
+<h1>Create account</h1>
+
+<%= form_for @user do |f| %>
+  <div class="form-group">
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname, autofocus: true, class: "form-control col-md-3 col-sm-6" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname, class: "form-control col-md-3 col-sm-6" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control col-md-3 col-sm-6" %>
+  </div>
+  <div class="form-group">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, class: "form-control col-md-3 col-sm-6" %>
   </div>
-  <div>
+  <div class="form-group">
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control col-md-3 col-sm-6" %>
   </div>
   <div>
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
