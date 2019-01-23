@@ -4,6 +4,7 @@
   var video = document.createElement("video");
   var canvasElement = document.getElementById("canvas");
   var canvas = canvasElement.getContext("2d");
+  var flag = true;
   function drawLine(begin, end, color) {
     canvas.beginPath();
     canvas.moveTo(begin.x, begin.y);
@@ -17,7 +18,7 @@
     video.srcObject = stream;
     video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
     video.play();
-    requestAnimationFrame(tick);
+    globalID = requestAnimationFrame(tick);
   });
   function tick() {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
@@ -30,13 +31,28 @@
         inversionAttempts: "dontInvert",
       });
       if (code) {
+        cancelAnimationFrame(globalID);
+        
         drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
         drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
         drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
         drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-        console.log(code.data);
+
+        var postdata = "associate_id=" + code.data;
+      
+        if (flag) {
+          Rails.ajax({
+            url: "/associations",
+            type: "POST",
+            data: postdata,
+            success: function(data) {
+              console.log('Successfully added association');
+            }
+          });
+         flag = false;
+        }
       }
     }
-    requestAnimationFrame(tick);
+    globalID = requestAnimationFrame(tick);
   }
 </script>
