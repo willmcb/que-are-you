@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="card" style="width: 18rem;">
     <img class="card-img-top rounded-circle p-2" src="http://placekitten.com/100/100" alt="Card image cap">
@@ -30,7 +31,9 @@
       </li>
     </ul>
     <div class="card-body">
-       <%= link_to "Edit details", edit_profile_path(id: @user.id), class: "btn btn-outline-success" %>
+       <% if params[:id] == session[:user_id] %>
+        <%= link_to "Edit details", edit_profile_path(id: @user.id), class: "btn btn-outline-success" %>
+       <% end %>
     </div>
   </div>
 </div>

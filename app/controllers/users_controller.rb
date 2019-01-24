@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authorize, only: [:index, :show, :edit, :update]
+  before_action :logged_in?, only: [:index, :show, :edit, :update]
 
   def new
     @user = User.new
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params['id'])
-
+    authorize_edit_profile
   end
 
   def update
