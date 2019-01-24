@@ -11,7 +11,7 @@ RSpec.describe "Edit profile page" do
     it "allows user to edit their profile page" do
       login
       visit "/users/#{@test_user.id}"
-      click_link 'Edit'
+      click_link 'Edit details'
       fill_in 'Firstname', with: 'Will'
       fill_in 'Job title', with: 'Chief will officer'
       fill_in 'Company name', with: 'willcorp'
