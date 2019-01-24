@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :firstname, presence: true
   validates :lastname, presence: true
 
+  has_one_attached :avatar
+
   has_many :associations
   has_many :associates, :through => :associations
 

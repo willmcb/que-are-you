@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   end
 
   def index
-     @qr = encode
+    @user = current_user
+    @qr = encode
   end
 
   def show
@@ -16,7 +17,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user.avatar.attach(io: File.open(Rails.root.join(
+      'public', 'Default_profile_image.jpg')), filename: 'Default_profile_image.jpg', content_type: 'image/jpg')
     @user.email.downcase!
 
     if @user.save
@@ -31,6 +33,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params['id'])
+
   end
 
   def update
@@ -46,7 +49,7 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography)
+    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar)
   end
 
   def encode
