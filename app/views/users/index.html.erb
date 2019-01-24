@@ -1,13 +1,7 @@
-<div id="profile_image">
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, size:"300x300", class: "mr-2 rounded-circle" %>
-  <% end %>
-</div>
-
 <div class="row">
   <div class="card" style="width: 18rem;">
     <div class="card-body mx-auto">
-      <h1 class="card-title">Scan me</h1>
+      <h1 class="card-title text-center">Scan <%= current_user.firstname%></h1>
       <p class="card-text">
          <table>
          <% @qr.modules.each_index do |x| -%>
@@ -23,7 +17,9 @@
          <% end -%>
         </table>
       </p>
-      <%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success" %>
+      <div class="row align-items-center justify-content-center">
+        <%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success center" %>
+      </div>
     </div>
   </div>
 </div>
