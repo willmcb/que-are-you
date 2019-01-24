@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user.avatar.attach(io: File.open(Rails.root.join(
+      'public', 'Default_profile_image.jpg')), filename: 'Default_profile_image.jpg', content_type: 'image/jpg')
     @user.email.downcase!
 
     if @user.save
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params['id'])
+
   end
 
   def update
