@@ -1,5 +1,5 @@
 function qrscanner() {
-  
+
   var video = document.createElement("video");
   var canvasElement = document.getElementById("canvas");
   var canvas = canvasElement.getContext("2d");
@@ -20,20 +20,11 @@ function qrscanner() {
     globalID = requestAnimationFrame(tick);
   });
   function tick() {
-    if (video.readyState === video.HAVE_ENOUGH_DATA) {
-      var videoProportion = ((window.innerWidth) / 100) * 75;
-      canvasElement.hidden = false;
-      canvasElement.height = videoProportion;
-      canvasElement.width =  videoProportion;
-      canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-      var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
-      var code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: "dontInvert",
-      });
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        var videoProportion = ((window.innerWidth) / 100) * 75;
         canvasElement.hidden = false;
-        canvasElement.height = video.videoHeight;
-        canvasElement.width = video.videoWidth;
+        canvasElement.height = videoProportion;
+        canvasElement.width =  videoProportion;
         canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
         var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
         var code = jsQR(imageData.data, imageData.width, imageData.height, {
@@ -42,7 +33,7 @@ function qrscanner() {
         if (code) {
           cancelAnimationFrame(globalID);
           video.srcObject.getTracks()[0].stop();
-          
+
           drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
           drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
           drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
@@ -63,7 +54,7 @@ function qrscanner() {
           }
         }
       }
-    
+
       if (window.location.pathname == '/associations/new') {
       globalID = requestAnimationFrame(tick);
       } else {
