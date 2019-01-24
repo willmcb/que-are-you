@@ -2,18 +2,21 @@
 <div>
   <ul>
     <li><%= @user.email %></li>
-
-    <% if @user.job_title %>
-      <li><%= @user.job_title %></li>
-    <% end %>
-
-    <% if @user.company_name %>
-      <li><%= @user.company_name %></li>
-    <% end %>
-
-    <% if @user.biography %>
-      <li><%= @user.biography %></li>
-    <% end %>
+    <div>
+      <% if @user.job_title %>
+        <li><%= @user.job_title %></li>
+      <% end %>
+    </div>
+    <div>
+      <% if @user.company_name %>
+        <li><%= @user.company_name %></li>
+      <% end %>
+    </div>
+    <div>
+      <% if @user.biography %>
+        <li><%= @user.biography %></li>
+      <% end %>
+    </div>
   </ul>
-  <%= link_to "Edit", edit_profile_path(id: @user.id) %>
+  <%= link_to "Edit", edit_profile_path(id: @user.id), class: "btn btn-primary" %>
 </div>
