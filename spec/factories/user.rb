@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :user do
     firstname { "testuser" }
     lastname { "testlastname" }
+    avatar { fixture_file_upload "#{Rails.root}/public/Default_profile_image.jpg", "image/jpg" }
     company_name { "superglobalmegacorp" }
     job_title { "tech worker" }
     biography { "Phasellus at porttitor enim, at accumsan ipsum. Integer eget justo" \

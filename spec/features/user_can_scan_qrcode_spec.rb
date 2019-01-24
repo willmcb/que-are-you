@@ -9,7 +9,7 @@ RSpec.describe "QR scanner" do
 
   it "shows a preview" do
     visit '/'
-    click_button 'Scan QR code'
+    all('a', text: 'Scan QR code')[1].click
     expect(page).to have_current_path '/associations/new'
   end
 end
