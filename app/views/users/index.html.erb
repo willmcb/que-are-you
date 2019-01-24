@@ -1,3 +1,10 @@
+<div id="profile_image">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, size:"300x300", class: "mr-2 rounded-circle" %>
+  <% end %>
+</div>
+
+<div style="padding: 20px">
 <table>
  <% @qr.modules.each_index do |x| -%>
    <tr>
@@ -11,5 +18,6 @@
    </tr>
  <% end -%>
 </table>
-</br>
+<br>
 <%= link_to('Scan QR code', '/associations/new') %>
+</div>
