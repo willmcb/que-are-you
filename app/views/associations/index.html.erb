@@ -1,6 +1,6 @@
 <% @associations.each do |associate| %>
   <div>
-    <%= "You are associated with user #{associate.associate_id}, congrats" %>
+    <%= "You are associated with user #{User.find(associate.associate_id).firstname} #{User.find(associate.associate_id).lastname}, congrats" %>
   </div>
 <% end %>
 <%= link_to "Associate?", new_association_path %>
