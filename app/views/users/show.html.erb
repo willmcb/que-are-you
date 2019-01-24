@@ -15,5 +15,7 @@
       <li><%= @user.biography %></li>
     <% end %>
   </ul>
-  <%= link_to "Edit", edit_profile_path(id: @user.id) %>
+  <% if params[:id] == session[:user_id] %>
+    <%= link_to "Edit", edit_profile_path(id: @user.id) %>
+  <% end %>
 </div>
