@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  # set up web socket server
+  mount ActionCable.server => '/cable'
+
   resources :associations
   root :to => 'users#index'
 
