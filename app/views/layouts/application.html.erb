@@ -24,9 +24,20 @@
           <ul class="navbar-nav">
              <% if current_user %>
                <!-- logged in -->
-               <%= "Hi, #{current_user.firstname}" %>
+               <li class="nav-link disabled">
+                 <%= "Hi, #{current_user.firstname}" %>
+              </li>
                <li class="nav-item">
                  <%= link_to 'Home', root_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to "My card", user_profile_path(current_user[:id]), class: 'nav-link'  %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Business cards', associations_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
                </li>
                <li class="nav-item">
                  <%= link_to 'Log out', logout_path, method: :delete, class: 'nav-link'%>
@@ -43,15 +54,19 @@
           </ul>
         </div>
       </nav>
-
-
-    <div class="container">
+    </br>
       <% if notice %>
-        <%= notice %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
       <% end %>
+
       <% if alert %>
-        <%= alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
       <% end %>
+
       <%= yield %>
     </div>
   </body>
