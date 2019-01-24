@@ -16,7 +16,6 @@ RSpec.describe "Edit profile page" do
       fill_in 'Job title', with: 'Chief will officer'
       fill_in 'Company name', with: 'willcorp'
       fill_in 'Biography', with: 'new bio stuff'
-      save_and_open_page
       click_button 'Submit'
       expect(page).to have_content 'Will'
       expect(page).to have_content 'Chief will officer'
