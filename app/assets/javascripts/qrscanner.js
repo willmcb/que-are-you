@@ -20,9 +20,10 @@ function qrscanner() {
   });
   function tick() {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      var videoProportion = ((window.innerWidth) / 100) * 75;
       canvasElement.hidden = false;
-      canvasElement.height = video.videoHeight;
-      canvasElement.width = video.videoWidth;
+      canvasElement.height = videoProportion;
+      canvasElement.width =  videoProportion;
       canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
       var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
       var code = jsQR(imageData.data, imageData.width, imageData.height, {
