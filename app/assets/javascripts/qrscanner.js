@@ -1,4 +1,5 @@
 function qrscanner() {
+  
   var video = document.createElement("video");
   var canvasElement = document.getElementById("canvas");
   var canvas = canvasElement.getContext("2d");
@@ -19,38 +20,47 @@ function qrscanner() {
     globalID = requestAnimationFrame(tick);
   });
   function tick() {
-    if (video.readyState === video.HAVE_ENOUGH_DATA) {
-      canvasElement.hidden = false;
-      canvasElement.height = video.videoHeight;
-      canvasElement.width = video.videoWidth;
-      canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-      var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
-      var code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: "dontInvert",
-      });
-      if (code) {
-        cancelAnimationFrame(globalID);
 
-        drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-        drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-        drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-        drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+    
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvasElement.hidden = false;
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        var code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        });
+        if (code) {
+          cancelAnimationFrame(globalID);
+          video.srcObject.getTracks()[0].stop();
+          
+          drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+          drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+          drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+          drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
-        var postdata = "associate_id=" + code.data;
+          var postdata = "associate_id=" + code.data;
 
-        if (flag) {
-          Rails.ajax({
-            url: "/associations",
-            type: "POST",
-            data: postdata,
-            success: function(data) {
-              console.log('Successfully added association');
-            }
-          });
-         flag = false;
+          if (flag) {
+            Rails.ajax({
+              url: "/associations",
+              type: "POST",
+              data: postdata,
+              success: function(data) {
+                console.log('Successfully added association');
+              }
+            });
+          flag = false;
+          }
         }
       }
+    
+      if (window.location.pathname == '/associations/new') {
+      globalID = requestAnimationFrame(tick);
+      } else {
+        video.srcObject.getTracks()[0].stop();
+      }
     }
-    globalID = requestAnimationFrame(tick);
-  }
+
 }
