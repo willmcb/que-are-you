@@ -5,6 +5,7 @@
 </div>
 
 <div style="padding: 20px">
+<h1 class="pb-2">Scan me</h1>
 <table>
  <% @qr.modules.each_index do |x| -%>
    <tr>
@@ -13,11 +14,11 @@
     <td class="black"/>
     <% else -%>
     <td class="white"/>
-    <% end -%>
-   <% end -%>
+    <% end %>
+   <% end %>
    </tr>
- <% end -%>
+ <% end %>
 </table>
 <br>
-<%= link_to('Scan QR code', '/associations/new') %>
-</div>
+</br>
+<%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success" %>

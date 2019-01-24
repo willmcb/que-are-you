@@ -7,9 +7,9 @@ RSpec.describe "QR scanner" do
     login
   end
 
-    it "shows a preview" do
-      visit '/'
-      click_link 'Scan QR code'
-      expect(page).to have_current_path '/associations/new'
-    end
+  it "shows a preview" do
+    visit '/'
+    click_button 'Scan QR code'
+    expect(page).to have_current_path '/associations/new'
+  end
 end
