@@ -4,28 +4,74 @@
     <title>Que Are You?</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-     <% if current_user %>
-      <!-- logged in -->
-      <%= "Hi, #{current_user.firstname}" %> | <%= link_to 'Home', root_path %> | <%= link_to 'Log out', logout_path, method: :delete %>
-    <% else %>
-      <!-- not logged in -->
-      <%= link_to 'Home', root_path %> | <%= link_to 'Log in', login_path %> or <%= link_to 'Create account', new_user_path %>
-    <% end %>
-    <hr>
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Que-are-you</a>
 
-    <% if notice %>
-      <%= notice %>
-    <% end %>
-    <% if alert %>
-      <%= alert %>
-    <% end %>
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <%= yield %>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+             <% if current_user %>
+               <!-- logged in -->
+               <li class="nav-link disabled">
+                 <%= "Hi, #{current_user.firstname}" %>
+              </li>
+               <li class="nav-item">
+                 <%= link_to 'Home', root_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to "My card", user_profile_path(current_user[:id]), class: 'nav-link'  %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Business cards', associations_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Log out', logout_path, method: :delete, class: 'nav-link'%>
+               </li>
+            <% else %>
+               <!-- not logged in -->
+               <li class="nav-item">
+                 <%= link_to 'Home', root_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+               <%= link_to 'Create account', new_user_path, class: 'nav-link'%>
+               </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </br>
+
+      <div class="container-fluid">
+        <% if notice %>
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert %>
+          <div class="alert alert-danger" role="alert">
+            <%= alert %>
+          </div>
+        <% end %>
+        <div class="centered">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
