@@ -48,6 +48,7 @@ function qrscanner() {
               data: postdata,
               success: function(data) {
                 console.log('Successfully added association');
+                video.srcObject.getTracks()[0].stop();
               }
             });
           flag = false;
