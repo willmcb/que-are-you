@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user.email.downcase!
 
     if @user.save
-      redirect_to root_path
+      redirect_to edit_profile_path(@user.id)
       session[:user_id] = @user.id.to_s
       flash[:notice] = "Account created successfully!"
     else
