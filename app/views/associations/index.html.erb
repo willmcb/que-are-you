@@ -1,8 +1,14 @@
-<% @associations.each do |associate| %>
-  <div>
-    <% user = User.find(associate.associate_id) %>
-    <% name = "#{user.firstname} #{user.lastname}" %>
-    <%= link_to "#{name}'s card", user_profile_path(user.id)%>
+<% @associations.each do |association| %>
+  <div class="pb-2">
+    <div class="card">
+      <img class="card-img-top rounded-circle p-2" src="http://placekitten.com/100/100"  alt="Card image cap">
+      <% associate = association.associate %>
+      <div class="card-body">
+        <h5 class="card-title"><%= associate.firstname %> <%= associate.lastname %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= associate.company_name if associate.company_name %></h6>
+        <%= link_to "view card", user_profile_path(associate.id), class: "btn btn-outline-info"%>
+      </div>
+    </div>
   </div>
 <% end %>
-<%= link_to "Add a business card", new_association_path, class: "btn btn-primary"  %>
+

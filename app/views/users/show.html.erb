@@ -1,35 +1,36 @@
-
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top rounded-circle p-2" src="http://placekitten.com/100/100" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title"><%= @user.firstname %> <%= @user.lastname %></h5>
-      <p class="card-text">
-        <% if @user.biography %>
-          <%= @user.biography %>
+<div class="row">
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top rounded-circle p-2" src="http://placekitten.com/100/100" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= @user.firstname %> <%= @user.lastname %></h5>
+        <p class="card-text">
+          <% if @user.biography %>
+            <%= @user.biography %>
+          <% end %>
+        </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="badge badge-info">company</span>
+        <% if @user.company_name %>
+           <%= @user.company_name %>
         <% end %>
-      </p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <span class="badge badge-info">company</span>
-      <% if @user.company_name %>
-         <%= @user.company_name %>
-      <% end %>
-    </li>
-    <li class="list-group-item">
-      <span class="badge badge-info">job title</span>
-      <% if @user.job_title %>
-         <%= @user.job_title %>
-      <% end %>
-    </li>
-    <li class="list-group-item">
-      <span class="badge badge-info">email</span>
-        <% if @user.email %>
-          <%= @user.email %>
+      </li>
+      <li class="list-group-item">
+        <span class="badge badge-info">job title</span>
+        <% if @user.job_title %>
+           <%= @user.job_title %>
         <% end %>
-    </li>
-  </ul>
-  <div class="card-body">
-     <%= link_to "Edit details", edit_profile_path(id: @user.id), class: "btn btn-outline-success" %>
+      </li>
+      <li class="list-group-item">
+        <span class="badge badge-info">email</span>
+          <% if @user.email %>
+            <%= @user.email %>
+          <% end %>
+      </li>
+    </ul>
+    <div class="card-body">
+       <%= link_to "Edit details", edit_profile_path(id: @user.id), class: "btn btn-outline-success" %>
+    </div>
   </div>
 </div>

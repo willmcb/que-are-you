@@ -4,21 +4,26 @@
   <% end %>
 </div>
 
-<div style="padding: 20px">
-<h1 class="pb-2">Scan me</h1>
-<table>
- <% @qr.modules.each_index do |x| -%>
-   <tr>
-   <% @qr.modules.each_index do |y| -%>
-    <% if @qr.dark?(x,y) -%>
-    <td class="black"/>
-    <% else -%>
-    <td class="white"/>
-    <% end %>
-   <% end %>
-   </tr>
- <% end %>
-</table>
-<br>
-</br>
-<%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success" %>
+<div class="row">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body mx-auto">
+      <h1 class="card-title">Scan me</h1>
+      <p class="card-text">
+         <table>
+         <% @qr.modules.each_index do |x| -%>
+           <tr>
+           <% @qr.modules.each_index do |y| -%>
+            <% if @qr.dark?(x,y) -%>
+            <td class="black"/>
+            <% else -%>
+            <td class="white"/>
+            <% end -%>
+           <% end -%>
+           </tr>
+         <% end -%>
+        </table>
+      </p>
+      <%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
