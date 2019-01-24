@@ -13,7 +13,7 @@ class AssociationsController < ApplicationController
     @opp_association = opposite_association(params[:associate_id], current_user.id)
     if @association.save && @opp_association.save
       flash[:notice] = "Added associate."
-      redirect_to associations_path
+      redirect_to user_profile_path(params[:associate_id])
     else
       flash[:notice] = "Unable to add associate."
       redirect_to root_url
