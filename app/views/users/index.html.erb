@@ -1,3 +1,7 @@
+<div id="profile_image">
+  <%= image_tag(@user.avatar) %>
+</div>
+
 <table>
  <% @qr.modules.each_index do |x| -%>
    <tr>

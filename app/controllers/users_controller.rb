@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   end
 
   def index
-     @qr = encode
+    @user = current_user
+    @qr = encode
   end
 
   def show
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography)
+    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar)
   end
 
   def encode
