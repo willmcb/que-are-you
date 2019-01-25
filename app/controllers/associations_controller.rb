@@ -20,6 +20,13 @@ class AssociationsController < ApplicationController
     end
   end
 
+  def destroy
+    @association = current_user.associations.find(params[:id])
+    @association.destroy
+    flash[:notice] = "Business card removed"
+    redirect_to associations_path
+  end
+
   private
 
   def opposite_association(associate_id, current_user_id)
