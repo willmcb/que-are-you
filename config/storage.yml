@@ -11,7 +11,7 @@ amazon:
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
   secret_access_key: <%= ENV["AWS_SECRET_KEY"] %>
   region: eu-west-2
-  bucket: arn:aws:s3:::que-are-you-profile-images
+  bucket: que-are-you-profile-images
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
