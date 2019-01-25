@@ -9,8 +9,6 @@ class AssociationsController < ApplicationController
   end
 
   def create
-    p "the current user id is !!!!!!!#{current_user.id}"
-    p  "the current associate id is !!!!!!!#{params[:associate_id]}"
     if current_user.id == params[:associate_id].to_i
         flash[:notice] = "You can't add your own profile."
         redirect_to associations_path
