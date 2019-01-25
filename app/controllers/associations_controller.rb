@@ -35,15 +35,15 @@ class AssociationsController < ApplicationController
     redirect_to associations_path
   end
 
-  def already_associates?(associates_id)
-    user_has_associate = current_user.associations.map do |association|
-      association.associate_id
-    end.include?(associates_id.to_i)
-  end
-
   private
 
   def opposite_association(associate_id, current_user_id)
     User.find(associate_id).associations.build(associate_id: current_user_id)
+  end
+
+  def already_associates?(associates_id)
+    user_has_associate = current_user.associations.map do |association|
+      association.associate_id
+    end.include?(associates_id.to_i)
   end
 end
