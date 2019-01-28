@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_103053) do
+ActiveRecord::Schema.define(version: 2019_01_28_120549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 2019_01_24_103053) do
     t.string "job_title"
     t.string "company_name"
     t.string "biography"
+    t.string "google_token"
+    t.string "google_refresh_token"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
