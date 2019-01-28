@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post 'users/:id/update' => 'users#update', as: 'update_profile'
 
   # routes for google authentication
+  get 'auth/google_oauth2', to: redirect('/auth/google_oauth2'), as: 'google_login'
   get 'auth/:provider/callback', to: 'sessions#googleAuth'
   get 'auth/failure', to: redirect('/')
 

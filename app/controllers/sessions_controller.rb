@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
     refresh_token = access_token.credentials.refresh_token
     user.google_refresh_token = refresh_token if refresh_token.present?
     user.save
-    session[:user_id] = user.id
-    redirect_to root_path, notice: 'Successfully logged in!'
+    session[:user_id] = user.id.to_s
+    redirect_to root_path, notice: 'Successfully connected to Google!'
   end
 end
