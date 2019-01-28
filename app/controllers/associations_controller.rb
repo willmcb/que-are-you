@@ -16,8 +16,8 @@ class AssociationsController < ApplicationController
       flash[:notice] = "You are already associates."
       redirect_to associations_path
     else
-      @association = current_user.associations.build(:associate_id => params[:associate_id])
-      @opp_association = opposite_association(params[:associate_id], current_user.id)
+      @association = current_user.associations.build(associate_id: params[:associate_id], latitude: params[:lat], longitude: params[:long])
+      @opp_association = opposite_association(params[:associate_id], params[:lat], params[:long], current_user.id)
       if @association.save && @opp_association.save
         flash[:notice] = "Added associate."
         redirect_to associations_path
@@ -37,12 +37,12 @@ class AssociationsController < ApplicationController
 
   private
 
-  def opposite_association(associate_id, current_user_id)
-    User.find(associate_id).associations.build(associate_id: current_user_id)
+  def opposite_association(associate_id, lat, long, current_user_id)
+    User.find(associate_id).associations.build(associate_id: current_user_id, latitude: lat, longitude: long)
   end
 
   def already_associates?(associates_id)
-    user_has_associate = current_user.associations.map do |association|
+    current_user.associations.map do |association|
       association.associate_id
     end.include?(associates_id.to_i)
   end

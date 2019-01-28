@@ -13,6 +13,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params['id'])
+    @association = current_user.associations.find_by(associate_id: @user.id)
+    @lat  = @association.latitude
+    @long = @association.longitude
   end
 
   def create
