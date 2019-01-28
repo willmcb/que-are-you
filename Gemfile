@@ -41,7 +41,7 @@ gem 'bootstrap', '~> 4.2.1'
 
 gem 'jquery-rails'
 
-gem 'google-api-client', '~> 0.8'
+gem 'google-api-client', '~> 0.8', require: 'google/apis/calendar_v3'
 
 gem "omniauth"
 gem "omniauth-google-oauth2"
