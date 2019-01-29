@@ -21,6 +21,11 @@
       <div class="row align-items-center justify-content-center">
         <%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success center" %>
       </div>
+
+      <div class="row align-items-center justify-content-center">
+       <%=  "Current event is: #{@user.event[0..-13]}" %>  <%= link_to '(change)', event_path(@user.id) %>
+      </div>
+
     </div>
   </div>
 </div>
