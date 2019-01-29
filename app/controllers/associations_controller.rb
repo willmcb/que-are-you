@@ -39,8 +39,10 @@ class AssociationsController < ApplicationController
     redirect_to associations_path
   end
 
+
+  private
+
   def get_events
-    p 'start'
   # Initialize Google Calendar API
   service = Google::Apis::CalendarV3::CalendarService.new
   # Use google keys to authorize
@@ -59,13 +61,15 @@ class AssociationsController < ApplicationController
                              )
   puts 'Upcoming events:'
   puts 'No upcoming events found' if response.items.empty?
+  puts response
+  puts 'response above'
   response.items.each do |event|
-    start = event.start.date || event.start.date_time
-    puts "- #{event.summary} (#{start})"
+    # start = event.start.date || event.start.date_time
+    puts "- EVENTS OBJECT #{event} "
   end
+  puts 'response ends'
 end
 
-  private
 
   def opposite_association(associate_id, current_user_id)
     User.find(associate_id).associations.build(associate_id: current_user_id)
@@ -78,8 +82,6 @@ end
   end
 
   def google_secret
-    p "user:"
-    p current_user
     Google::APIClient::ClientSecrets.new(
       { "web" =>
         { "access_token" => current_user.google_token,
