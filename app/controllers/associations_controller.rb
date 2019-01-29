@@ -1,6 +1,3 @@
-require 'google/api_client/client_secrets.rb'
-require 'google/apis/calendar_v3'
-
 class AssociationsController < ApplicationController
 
   def index
@@ -42,36 +39,6 @@ class AssociationsController < ApplicationController
 
   private
 
-  def get_events
-  # Initialize Google Calendar API
-  service = Google::Apis::CalendarV3::CalendarService.new
-  # Use google keys to authorize
-  service.authorization = google_secret.to_authorization
-  # Request for a new aceess token just incase it expired
-  service.authorization.refresh!
-  # Get a list of events
-  calendar_id = 'primary'
-  start_date = Date.today.rfc3339
-  end_date = (Date.today + 1).rfc3339
-  response = service.list_events(calendar_id,
-                               single_events: true,
-                               order_by: 'startTime',
-                               time_min: start_date,
-                               time_max: end_date
-                             )
-  puts 'No events found' if response.items.empty?
-  response.items.each do |event|
-    if event.attendees != nil
-      event.attendees.each do |attendee|
-        if attendee.email == current_user.email && attendee.response_status != "declined"
-          puts "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
-        end
-      end
-    else puts "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
-    end
-  end
-end
-
   def opposite_association(associate_id, current_user_id)
     User.find(associate_id).associations.build(associate_id: current_user_id)
   end
@@ -82,15 +49,4 @@ end
     end.include?(associates_id.to_i)
   end
 
-  def google_secret
-    Google::APIClient::ClientSecrets.new(
-      { "web" =>
-        { "access_token" => current_user.google_token,
-          "refresh_token" => current_user.google_refresh_token,
-          "client_id" => ENV['GOOGLE_CLIENT_ID'],
-          "client_secret" => ENV['GOOGLE_CLIENT_SECRET']
-        }
-      }
-    )
-  end
 end
