@@ -22,7 +22,7 @@ class AssociationsController < ApplicationController
     else
       @association = current_user.associations.build(:associate_id => params[:associate_id])
       @opp_association = opposite_association(params[:associate_id], current_user.id)
-      if @association.save && @opp_association.save
+      if @association.save || @opp_association.save
         flash[:notice] = "Added associate."
         redirect_to associations_path
       else
