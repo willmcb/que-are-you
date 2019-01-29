@@ -12,5 +12,6 @@ class User < ApplicationRecord
   has_many :inverse_associations, :through => :inverse_associations, :source => :user
 
   has_many :messages
+  
   has_secure_password
 end
