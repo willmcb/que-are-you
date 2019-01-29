@@ -1,9 +1,26 @@
 <h1>Messages</h1>
-<% @messages.each do |message| %>
-  <% @users.each do |user| %>
-    <% if user.id == message.user_id  %>
-    <%= "#{user.firstname} #{user.lastname} " %>
+<div id="messages">
+  <% @messages.each do |message| %>
+    <div class="card mt-5">
+      <div class="card-header">
+        <h5>
+        <% @users.each do |user| %>
+          <% if user.id == message.user_id  %>
+            <%= image_tag user.avatar, size:"20x30", class: "mr-2 rounded-circle" %>
+            <%= "#{user.firstname} #{user.lastname} " %>
+            <% end %>
+            <small class="float-sm-right">
+              <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
+            </small>
+          </div>
+        <div class="card-body">
+        <%= message.content %>
+        </div>
+        <div class="card-footer">
+          <%= link_to "View card", user_profile_path(user.id), class: "btn btn-outline-info"%>
+          <%= link_to "Send message", message_associate_path(user.id), class: "btn btn-outline-info"%>
+        </div>
     <% end %>
-    <% end %>
-    <%= message.content %>
-<% end %>
+  </div>
+  <% end %>
+</div>
