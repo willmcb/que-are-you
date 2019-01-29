@@ -21,5 +21,4 @@ Rails.application.routes.draw do
   # users edit profile page
   get 'users/:id/edit' => 'users#edit', as: 'edit_profile'
   post 'users/:id/update' => 'users#update', as: 'update_profile'
-
 end
