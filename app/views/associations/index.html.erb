@@ -2,19 +2,21 @@
 <input type="text" id="assocSearch" class="form-control mb-3 pt-1" placeholder="search by name">
 <div id="associations">
   <% @associations.each do |association| %>
-  <div class="pb-2">
+  <div class="pb-1">
     <div class="card">
       <% associate = association.associate %>
-        <%= image_tag associate.avatar, class: "mr-2 rounded-circle" %>
-        <div class="card-body">
-          <h5 class="card-title"><%= associate.firstname %> <%= associate.lastname %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= associate.company_name if associate.company_name %></h6>
-          <%= link_to "view card", user_profile_path(associate.id), class: "btn btn-outline-info"%>
-          <%= link_to "remove", association,
-          :method => :delete ,
-          data: { confirm: "Are you sure?" },
-          class: "btn btn-outline-danger"%>
-        </div>
+      <div style="padding: 15px" >
+        <%= image_tag associate.avatar, class: "rounded-circle" %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= associate.firstname %> <%= associate.lastname %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= associate.company_name if associate.company_name %></h6>
+        <%= link_to "view card", user_profile_path(associate.id), class: "btn btn-outline-info"%>
+        <%= link_to "remove", association,
+        :method => :delete ,
+        data: { confirm: "Are you sure?" },
+        class: "btn btn-outline-danger"%>
+      </div>
     </div>
   </div>
 <% end %>
