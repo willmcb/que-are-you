@@ -1,0 +1,9 @@
+<h1>Messages</h1>
+<% @messages.each do |message| %>
+  <% @users.each do |user| %>
+    <% if user.id == message.user_id  %>
+    <%= "#{user.firstname} #{user.lastname} " %>
+    <% end %>
+    <% end %>
+    <%= message.content %>
+<% end %>

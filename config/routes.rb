@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   post 'users/:id/update' => 'users#update', as: 'update_profile'
 
   # route for create message
-  get 'users/:id/message/new' => 'message#new', as: 'message_associate'
+  get 'users/:id/messages/new' => 'messages#new', as: 'message_associate'
 end
