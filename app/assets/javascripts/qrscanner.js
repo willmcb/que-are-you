@@ -1,9 +1,38 @@
+function getLocation() {
+    var coords = {lat: null, long: null};
+    navigator.geolocation.getCurrentPosition(
+        function success(position) {
+            console.log("lat:" + position.coords.latitude);
+            console.log("long:" + position.coords.longitude);
+            coords.lat =  position.coords.latitude;
+            coords.long = position.coords.longitude;
+        },
+        function error(error_message) {
+            console.error('An error has occured while retrieving location', error_message);
+        }
+    );
+    return coords
+}
+
+function locationNotSupported(){
+    console.log('geolocation is not enabled on this browser');
+};
+
+
+
 function qrscanner() {
+  var coords = null;
+  if ("geolocation" in navigator) {
+      coords = getLocation();
+  } else {
+      locationNotSupported();
+  }
 
   var video = document.createElement("video");
   var canvasElement = document.getElementById("canvas");
   var canvas = canvasElement.getContext("2d");
   var flag = true;
+
   function drawLine(begin, end, color) {
     canvas.beginPath();
     canvas.moveTo(begin.x, begin.y);
@@ -19,6 +48,7 @@ function qrscanner() {
     video.play();
     globalID = requestAnimationFrame(tick);
   });
+
   function tick() {
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
         var videoProportion = ((window.innerWidth) / 100) * 75;
@@ -39,7 +69,11 @@ function qrscanner() {
           drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
           drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
-          var postdata = "associate_id=" + code.data;
+          if(coords.lat && coords.long){
+            var postdata = "associate_id=" + code.data + "&lat=" + coords.lat + "&long=" + coords.long;
+          } else {
+            var postdata = "associate_id=" + code.data;
+          }
 
           if (flag) {
             Rails.ajax({
