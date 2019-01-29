@@ -23,8 +23,11 @@
       </div>
       
       <div class="row align-items-center justify-content-center">
+      <%= link_to "Connect to Google Calendar", google_login_path , class: "btn btn-primary" %>
+      <% if @user.google_token != nil %>
         <%= select_tag name='event', options_from_collection_for_select(@events, "id", "name") , class: "btn btn-success center" %>
       </div>
+      <% end %>
 
     </div>
   </div>

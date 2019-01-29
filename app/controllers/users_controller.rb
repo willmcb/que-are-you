@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @qr = encode
-    @events = get_events
   end
 
   def show
