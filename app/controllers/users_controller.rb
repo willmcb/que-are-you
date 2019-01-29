@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @qr = encode
+    @events = get_events if @user.google_token != nil
   end
 
   def show
