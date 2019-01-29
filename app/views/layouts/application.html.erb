@@ -37,6 +37,9 @@
                  <%= link_to 'Business cards', associations_path, class: 'nav-link' %>
                </li>
                <li class="nav-item">
+                 <%= link_to 'Event', event_path(current_user[:id]), class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
                  <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
                </li>
                <li class="nav-item">

@@ -21,15 +21,6 @@
       <div class="row align-items-center justify-content-center">
         <%= link_to 'Scan QR code', '/associations/new', class: "btn btn-success center" %>
       </div>
-      
-      <div class="row align-items-center justify-content-center">
-        <% if @user.google_token != nil %>
-          <%= select_tag name='event', options_for_select(@events), {:include_blank => true} %>
-        <% else %>
-          <%= link_to "Connect to Google Calendar", google_login_path , class: "btn btn-primary" %>
-        <% end %>
-      </div>
-
     </div>
   </div>
 </div>

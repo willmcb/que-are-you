@@ -1,0 +1,27 @@
+<h1 class="pb-2">Event</h1>
+
+<div class="row align-items-center justify-content-center">
+  <% if @user.google_token == nil %>
+    <%= link_to "Connect to Google Calendar", google_login_path , class: "btn btn-primary" %>
+  <% end %>
+
+  <%= form_with url: update_event_path do |f| %>
+  <div class="form-group">
+    <% if @user.google_token != nil %>
+      <%= f.select name='event', options_for_select(@events), prompt: "Select event you are at" %>
+    <% end %>
+  </div>
+</br>
+</br>
+  <div class="form-group">
+    <%= f.label :Other_event %>
+    <%= f.text_field :other_event, class: "form-control col-md-3 col-sm-6"  %>
+  </div>
+  </br>
+  <div>
+    <%= f.submit "Submit", class: "btn btn-primary"  %>
+  </div>
+  </br>
+
+  </div>
+<% end %>

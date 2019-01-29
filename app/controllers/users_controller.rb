@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @qr = encode
-    @events = get_events if @user.google_token != nil
   end
 
   def show
@@ -46,6 +45,18 @@ class UsersController < ApplicationController
     redirect_to user_profile_path(@user_id)
   end
 
+  def event
+    @user = current_user
+    @events = get_events if @user.google_token != nil
+    render :event
+  end
+
+  def update_event
+    @user_id = update_event_params[:id]
+    User.find(@user_id).update(update_event_params)
+    redirect_to root_path
+  end
+
   private
 
   def user_params
@@ -53,7 +64,11 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar)
+    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar, :event)
+  end
+
+  def update_event_params
+    params.permit(:id, :event)
   end
 
   def encode
@@ -86,14 +101,13 @@ class UsersController < ApplicationController
             @events << "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
           end
         end
-      else 
+      else
         @events << "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
       end
     end
-
     @events
   end
-  
+
   def google_secret
     Google::APIClient::ClientSecrets.new(
       { "web" =>

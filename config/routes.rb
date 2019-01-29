@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   # users edit profile page
   get 'users/:id/edit' => 'users#edit', as: 'edit_profile'
   post 'users/:id/update' => 'users#update', as: 'update_profile'
+  get 'users/:id/event' => 'users#event', as: 'event'
+  post 'users/:id/update_event' => 'users#update_event', as: 'update_event'
 
   # routes for google authentication
   get 'auth/google_oauth2', to: redirect('/auth/google_oauth2'), as: 'google_login'
