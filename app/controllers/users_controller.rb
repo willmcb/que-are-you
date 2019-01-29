@@ -64,10 +64,11 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar, :event)
+    params.permit(:id, :firstname, :lastname, :email, :job_title, :company_name, :biography, :avatar, :event, :other_event)
   end
 
   def update_event_params
+    params[:event] = params[:other_event] if params[:event] == "Other"
     params.permit(:id, :event)
   end
 
@@ -98,14 +99,14 @@ class UsersController < ApplicationController
       if event.attendees != nil
         event.attendees.each do |attendee|
           if attendee.email == current_user.email && attendee.response_status != "declined"
-            @events << "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
+            @events << "#{event.summary}"
           end
         end
       else
-        @events << "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
+        @events << "#{event.summary}"
       end
     end
-    @events
+    @events << "Other"
   end
 
   def google_secret

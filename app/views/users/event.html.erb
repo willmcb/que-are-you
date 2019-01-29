@@ -14,8 +14,8 @@
 </br>
 </br>
   <div class="form-group">
-    <%= f.label :Other_event %>
-    <%= f.text_field :other_event, class: "form-control col-md-3 col-sm-6"  %>
+    <%= f.label :Other_event, id: "other_event_label" %>
+    <%= f.text_field :other_event, class: "form-control col-md-3 col-sm-6", id: "other_event" %>
   </div>
   </br>
   <div>
@@ -25,3 +25,21 @@
 
   </div>
 <% end %>
+
+<script>
+$(document).ready(function(){
+   $('#other_event').hide();
+   $('#other_event_label').hide();
+
+  $('#event').change(function() {
+    if(this.value == "Other") {     
+      $('#other_event').show();
+      $('#other_event_label').show();
+    }else{
+      console.log('here');
+      $('#other_event').hide();
+      $('#other_event_label').hide();
+    }
+  });
+});
+</script>
