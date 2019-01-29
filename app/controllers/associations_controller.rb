@@ -59,17 +59,18 @@ class AssociationsController < ApplicationController
                                time_min: start_date,
                                time_max: end_date
                              )
-  puts 'Upcoming events:'
-  puts 'No upcoming events found' if response.items.empty?
-  puts response
-  puts 'response above'
+  puts 'No events found' if response.items.empty?
   response.items.each do |event|
-    # start = event.start.date || event.start.date_time
-    puts "- EVENTS OBJECT #{event} "
+    if event.attendees != nil
+      event.attendees.each do |attendee|
+        if attendee.email == current_user.email && attendee.response_status != "declined"
+          puts "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
+        end
+      end
+    else puts "#{event.summary} (#{Date.today.strftime("%d.%m.%Y")})"
+    end
   end
-  puts 'response ends'
 end
-
 
   def opposite_association(associate_id, current_user_id)
     User.find(associate_id).associations.build(associate_id: current_user_id)
