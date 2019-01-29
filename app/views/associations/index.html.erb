@@ -1,4 +1,6 @@
 <h1>Business cards</h1>
+<input type="text" id="assocSearch" class="form-control mb-3 pt-1" placeholder="search by name">
+<div id="associations">
   <% @associations.each do |association| %>
   <div class="pb-2">
     <div class="card">
@@ -16,3 +18,9 @@
     </div>
   </div>
 <% end %>
+
+</div>
+
+<script>
+  startSearch();
+</script>
