@@ -24,6 +24,14 @@ class MessagesController < ApplicationController
     end
   end
 
+  def destroy
+    p params
+    @message = Message.find(params[:id])
+    @message.destroy
+    flash[:notice] = "Business card removed"
+    redirect_to messages_path
+  end
+
   private
 
   def message_params
