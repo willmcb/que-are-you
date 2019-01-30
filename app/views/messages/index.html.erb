@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Messages
+    Select
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" id="#inbox">Inbox</a>
@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 
 <div id="inbox_id">
-  <br>
+  <h2>Inbox</h2>
   <% @messages.each do |message| %>
   <% user = User.find(message.user_id) %>
   <% if user.id == message.sender_id %>
@@ -63,7 +63,7 @@ $(document).ready(function(){
 </div>
 
 <div id="sent_messages_id">
-  <br>
+    <h2>Sent messages</h2>
   <% @messages.each do |message| %>
   <% @user = current_user %>
   <% if @user.id != message.sender_id %>
