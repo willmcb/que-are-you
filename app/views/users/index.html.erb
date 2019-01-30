@@ -23,7 +23,12 @@
       </div>
 
       <div class="row align-items-center justify-content-center">
-       <%=  "Current event is: #{@user.event}" %>  <%= link_to '(change)', event_path(@user.id) %>
+       <% if @user.event == '' ||  @user.event == nil %>
+       <%=  "No current event" %>  
+       <% else %>
+       <%=  "Current event is: #{@user.event}" %>  
+       <% end %>
+       <%= link_to '(change)', event_path(@user.id) %>
       </div>
 
     </div>

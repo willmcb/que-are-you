@@ -53,6 +53,7 @@ class UsersController < ApplicationController
   def event
     @user = current_user
     @events = get_events if @user.google_token != nil
+    @events = ['Other'] if @user.google_token == nil
     render :event
   end
 
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
     # Use google keys to authorize
     service.authorization = google_secret.to_authorization
     # Request for a new aceess token just incase it expired
-    service.authorization.refresh!
+    # service.authorization.refresh!
     # Get a list of events
     calendar_id = 'primary'
     start_date = Date.today.rfc3339
