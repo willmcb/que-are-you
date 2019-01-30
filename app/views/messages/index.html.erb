@@ -1,28 +1,30 @@
 <h1>Messages</h1>
 <div id="messages">
   <% @messages.each do |message| %>
+  <% user = User.find(message.user_id) %>
+  <% if user.id == message.sender_id %>
   <div class="row">
     <div class="card col-11">
-      <% user = User.find(message.user_id) %>
-      <div class="row">
-        <div class="col-3" >
-          <%= image_tag user.avatar, class: "rounded-circle" %>
+        <div class="row">
+          <div class="col-3" >
+            <%= image_tag user.avatar, class: "rounded-circle" %>
+          </div>
+          <div class="card-body col-9">
+            <%= "#{user.firstname} #{user.lastname} " %>
+            <small class="float-sm-right">
+              <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
+            </small>
+            <br>
+            <br>
+            <%= message.content %>
+          </div>
+          <div class="card-footer float-right col-12">
+            <%= link_to "View card", user_profile_path(user.id), class: "btn btn-outline-info"%>
+            <%= link_to "Reply", message_associate_path(user.id), class: "btn btn-outline-info"%>
+          </div>
         </div>
-        <div class="card-body col-9">
-          <%= "#{user.firstname} #{user.lastname} " %>
-          <small class="float-sm-right">
-            <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
-          </small>
-          <br>
-          <br>
-          <%= message.content %>
-        </div>
-      <div class="card-footer float-right col-12">
-        <%= link_to "View card", user_profile_path(user.id), class: "btn btn-outline-info"%>
-        <%= link_to "Reply", message_associate_path(user.id), class: "btn btn-outline-info"%>
       </div>
-      </div>
-    </div>
   </div>
+    <% end %>
   <% end %>
 </div>
