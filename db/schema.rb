@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_120507) do
+ActiveRecord::Schema.define(version: 2019_01_30_151722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_120507) do
     t.datetime "updated_at", null: false
     t.string "longitude"
     t.string "latitude"
+    t.string "event"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -64,6 +65,9 @@ ActiveRecord::Schema.define(version: 2019_01_30_120507) do
     t.string "job_title"
     t.string "company_name"
     t.string "biography"
+    t.string "google_token"
+    t.string "google_refresh_token"
+    t.string "event"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
