@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   def index
     @users = User.all
     @messages = Message.where(associate_id: current_user.id)
+    @sent_messages = Message.where(user_id: current_user.id)
   end
 
   def new

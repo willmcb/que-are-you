@@ -28,10 +28,12 @@ $(document).ready(function(){
 <div id="inbox_id">
   <div style="padding: 5px">
     <h3>Inbox</h3>
+    <% @user = current_user %>
   </div>
   <% @messages.each do |message| %>
   <% user = User.find(message.user_id) %>
-  <% if user.id == message.sender_id %>
+  <% associate = User.find(message.associate_id) %>
+  <% if message.sender_id != @user.id %>
   <div class="row">
     <div class="card col-11">
         <div class="row">
@@ -66,17 +68,18 @@ $(document).ready(function(){
   <div style="padding: 5px">
     <h3>Sent messages</h3>
   </div>
-  <% @messages.each do |message| %>
+  <% @sent_messages.each do |message| %>
   <% @user = current_user %>
-  <% if @user.id != message.sender_id %>
+  <% associate = User.find(message.associate_id) %>
+  <% if message.user_id == message.sender_id && message.user_id == @user.id %>
   <div class="row">
     <div class="card col-11">
         <div class="row">
           <div class="col-3" >
-            <%= image_tag @user.avatar, class: "rounded-circle" %>
+            <%= image_tag associate.avatar, class: "rounded-circle" %>
           </div>
           <div class="card-body col-9">
-            <h4><%= "#{@user.firstname} #{@user.lastname} " %> </h4>
+            <h4><%= "Sent to #{associate.firstname} #{associate.lastname} " %> </h4>
             <small class="float-sm-right">
               <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
             </small>
@@ -85,7 +88,8 @@ $(document).ready(function(){
             <%= message.content %>
           </div>
           <div class="card-footer float-right col-12">
-            <%= link_to "View card", user_profile_path(@user.id), class: "btn btn-outline-info"%>
+            <%= link_to "View card", user_profile_path(associate.id), class: "btn btn-outline-info"%>
+            <%= link_to "Send message", message_associate_path(associate.id), class: "btn btn-outline-info"%>
             <%= link_to "Remove", message,
             :method => :delete ,
             class: "btn btn-outline-danger"%>
