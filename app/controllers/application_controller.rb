@@ -13,5 +13,5 @@ class ApplicationController < ActionController::Base
 
   def authorize_edit_profile
     redirect_to root_path, alert: 'You can only edit your own profile.' if params[:id] != session[:user_id]
-  end 
+  end
 end
