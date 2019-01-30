@@ -88,7 +88,7 @@ class UsersController < ApplicationController
     # Use google keys to authorize
     service.authorization = google_secret.to_authorization
     # Request for a new aceess token just incase it expired
-    # service.authorization.refresh!
+    service.authorization.refresh!
     # Get a list of events
     calendar_id = 'primary'
     start_date = Date.today.rfc3339
@@ -116,10 +116,14 @@ class UsersController < ApplicationController
   end
 
   def google_secret
+    p current_user.google_token
+    p 'leave space between the above and below tokens'
+    p current_user.google_refresh_token
     Google::APIClient::ClientSecrets.new(
       { "web" =>
         { "access_token" => current_user.google_token,
           "refresh_token" => current_user.google_refresh_token,
+          "grant_type" => "refresh_token",
           "client_id" => ENV['GOOGLE_CLIENT_ID'],
           "client_secret" => ENV['GOOGLE_CLIENT_SECRET']
         }

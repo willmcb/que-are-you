@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :associations
+  resources :messages
   root :to => 'users#index'
 
   # sign up
@@ -26,7 +27,9 @@ Rails.application.routes.draw do
 
   # routes for google authentication
   get 'auth/google_oauth2', to: redirect('/auth/google_oauth2'), as: 'google_login'
-  get 'auth/:provider/callback', to: 'sessions#googleAuth'
+  get 'auth/:provider/callback', to: 'sessions#google_auth'
   get 'auth/failure', to: redirect('/')
 
+  # route for create message
+  get 'users/:id/messages/new' => 'messages#new', as: 'message_associate'
 end

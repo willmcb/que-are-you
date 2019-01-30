@@ -43,6 +43,9 @@
                  <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
                </li>
                <li class="nav-item">
+                 <%= link_to 'My messages', messages_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
                  <%= link_to 'Log out', logout_path, method: :delete, class: 'nav-link'%>
                </li>
             <% else %>
