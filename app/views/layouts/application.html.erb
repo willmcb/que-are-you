@@ -29,18 +29,23 @@
               </li>
                <li class="nav-item">
                  <%= link_to 'Home', root_path, class: 'nav-link' %>
+                 <%= octicon("home") %>
                </li>
                <li class="nav-item">
                  <%= link_to "My card", user_profile_path(current_user[:id]), class: 'nav-link'  %>
+                 <%= octicon "person" %>
                </li>
                <li class="nav-item">
                  <%= link_to 'Business cards', associations_path, class: 'nav-link' %>
+                 <%= octicon "note" %>
                </li>
                <li class="nav-item">
                  <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
+                 <%= octicon "screen-full" %>
                </li>
                <li class="nav-item">
                  <%= link_to 'Log out', logout_path, method: :delete, class: 'nav-link'%>
+                 <%= octicon "sign-out" %>
                </li>
             <% else %>
                <!-- not logged in -->
