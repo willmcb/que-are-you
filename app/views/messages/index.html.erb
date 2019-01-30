@@ -28,7 +28,9 @@ $(document).ready(function(){
 
 
 <div id="inbox_id">
-  <h2>Inbox</h2>
+  <div style="padding: 5px">
+    <h3>Inbox</h3>
+  </div>
   <% @messages.each do |message| %>
   <% user = User.find(message.user_id) %>
   <% if user.id == message.sender_id %>
@@ -39,7 +41,7 @@ $(document).ready(function(){
             <%= image_tag user.avatar, class: "rounded-circle" %>
           </div>
           <div class="card-body col-9">
-            <%= "#{user.firstname} #{user.lastname} " %>
+            <h4><%= "#{user.firstname} #{user.lastname} " %> </h4>
             <small class="float-sm-right">
               <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
             </small>
@@ -63,7 +65,9 @@ $(document).ready(function(){
 </div>
 
 <div id="sent_messages_id">
-    <h2>Sent messages</h2>
+  <div style="padding: 5px">
+    <h3>Sent messages</h3>
+  </div>
   <% @messages.each do |message| %>
   <% @user = current_user %>
   <% if @user.id != message.sender_id %>
@@ -74,7 +78,7 @@ $(document).ready(function(){
             <%= image_tag @user.avatar, class: "rounded-circle" %>
           </div>
           <div class="card-body col-9">
-            <%= "#{@user.firstname} #{@user.lastname} " %>
+            <h4><%= "#{@user.firstname} #{@user.lastname} " %> </h4>
             <small class="float-sm-right">
               <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
             </small>
