@@ -12,12 +12,18 @@
         <div class="card-body col-9">
           <h5 class="card-title"><%= associate.firstname %> <%= associate.lastname %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= associate.company_name if associate.company_name %></h6>
-          <%= link_to "view card", user_profile_path(associate.id), class: "btn btn-outline-info  mr-2"%>
-          <%= link_to "send message", message_associate_path(associate.id), class: "btn btn-outline-info"%>
-          <%= link_to "remove", association,
-          :method => :delete ,
-          data: { confirm: "Are you sure?" },
-          class: "btn btn-outline-danger"%>
+          <div style="padding: 5px">
+            <%= link_to "view card", user_profile_path(associate.id), class: "btn btn-outline-info  mr-2"%>
+          </div>
+          <div style="padding: 5px">
+            <%= link_to "send message", message_associate_path(associate.id), class: "btn btn-outline-info"%>
+          </div>
+          <div style="padding: 5px">
+            <%= link_to "remove", association,
+            :method => :delete ,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-outline-danger"%>
+          </div>
         </div>
       </div>
     </div>
