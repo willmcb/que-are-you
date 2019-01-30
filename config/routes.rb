@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :associations
+  resources :messages
   root :to => 'users#index'
 
   # sign up
@@ -22,4 +23,6 @@ Rails.application.routes.draw do
   get 'users/:id/edit' => 'users#edit', as: 'edit_profile'
   post 'users/:id/update' => 'users#update', as: 'update_profile'
 
+  # route for create message
+  get 'users/:id/messages/new' => 'messages#new', as: 'message_associate'
 end

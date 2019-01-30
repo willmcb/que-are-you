@@ -1,0 +1,6 @@
+<%= form_for @message do |form| %>
+  <%= form.label :Message %>
+  <%= form.text_field :content %>
+  <%= form.hidden_field(:associate_id, :value => @associate.id) %>
+  <%= form.submit "Submit" %>
+<% end %>
