@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> QR You?</title>
+    <title> QRU </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
   <body>
       <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">QR you?</a>
+        <a class="navbar-brand" href="#">QRU</a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -25,7 +25,7 @@
              <% if current_user %>
                <!-- logged in -->
                <li class="nav-link disabled">
-                 <%= "Hi, #{current_user.firstname}" %>
+                 <%= "Hi, #{current_user.firstname.capitalize}" %>
               </li>
                <li class="nav-item">
                  <%= link_to 'Home', root_path, class: 'nav-link' %>
@@ -35,6 +35,9 @@
                </li>
                <li class="nav-item">
                  <%= link_to 'Business cards', associations_path, class: 'nav-link' %>
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Event', event_path(current_user[:id]), class: 'nav-link' %>
                </li>
                <li class="nav-item">
                  <%= link_to 'Scan QR code', new_association_path, class: 'nav-link' %>
