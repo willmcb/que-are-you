@@ -1,5 +1,34 @@
-<h1>Messages</h1>
-<div id="messages">
+<script>
+$(document).ready(function(){
+  $("#inbox_id").show();
+  $("#sent_messages_id").hide();
+  $(".dropdown-menu a").click(function(){
+    if ($(this).text() == "Inbox") {
+      $("#inbox_id").show();
+      $("#sent_messages_id").hide();
+      console.log("hi")
+    } else {
+      console.log("hiya")
+      $("#inbox_id").hide();
+      $("#sent_messages_id").show();
+    }
+  });
+});
+</script>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Messages
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" id="#inbox">Inbox</a>
+    <a class="dropdown-item" id="#sent_messages">Sent messages</a>
+  </div>
+</div>
+
+
+<div id="inbox_id">
+  <br>
   <% @messages.each do |message| %>
   <% user = User.find(message.user_id) %>
   <% if user.id == message.sender_id %>
@@ -27,7 +56,42 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
     <% end %>
   <% end %>
+  </div>
+</div>
+
+<div id="sent_messages_id">
+  <br>
+  <% @messages.each do |message| %>
+  <% @user = current_user %>
+  <% if @user.id != message.sender_id %>
+  <div class="row">
+    <div class="card col-11">
+        <div class="row">
+          <div class="col-3" >
+            <%= image_tag @user.avatar, class: "rounded-circle" %>
+          </div>
+          <div class="card-body col-9">
+            <%= "#{@user.firstname} #{@user.lastname} " %>
+            <small class="float-sm-right">
+              <%= "#{distance_of_time_in_words_to_now(message.created_at)} ago" %>
+            </small>
+            <br>
+            <br>
+            <%= message.content %>
+          </div>
+          <div class="card-footer float-right col-12">
+            <%= link_to "View card", user_profile_path(@user.id), class: "btn btn-outline-info"%>
+            <%= link_to "Remove", message,
+            :method => :delete ,
+            class: "btn btn-outline-danger"%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
 </div>

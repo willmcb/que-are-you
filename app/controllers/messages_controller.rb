@@ -25,7 +25,6 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    p params
     @message = Message.find(params[:id])
     @message.destroy
     flash[:notice] = "Business card removed"
