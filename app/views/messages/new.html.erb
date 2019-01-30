@@ -2,5 +2,5 @@
   <%= form.label :Message %>
   <%= form.text_field :content %>
   <%= form.hidden_field(:associate_id, :value => @associate.id) %>
-  <%= form.submit "Submit" %>
+  <%= form.submit "Submit", class: "btn btn-outline-info" %>
 <% end %>
