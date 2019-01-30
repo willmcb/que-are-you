@@ -40,7 +40,7 @@
       <% if current_user.id != @user.id %>
         <%= link_to "Send message", message_associate_path(@user.id), class: "btn btn-outline-info"%>
 
-          <% if @association.event!= nil || @association.event!= '' %>
+          <% if @association.event != nil || @association.event != '' %>
             <h3>You met at</h3>
             <h5><%= @association.event %></h5>
           <% end %>
