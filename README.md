@@ -30,6 +30,12 @@ First, clone this repository. Then:
 > rails server # Start the server at localhost:3000
 ```
 
+## For google calendar connection feature
+
+You'll need a google OAuth client ID and client secret ID
+and place these in environment variables: 'GOOGLE_CLIENT_ID' and 'GOOGLE_CLIENT_SECRET'
+(example instructions found here https://medium.com/@amoschoo/google-oauth-for-ruby-on-rails-129ce7196f35)
+
 ## Minimum Viable Product
 - User signup / signin
 - Adding business cards by scanning QR code
